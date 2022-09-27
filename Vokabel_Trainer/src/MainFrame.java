@@ -1,16 +1,17 @@
+import java.util.Arrays;
 import java.util.Hashtable;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class MainFrame {
-    String Hpwd = "1986";
+    char[] Hpwd = {'1','9','8','6'};
     String Husr = "EKNEG";
 
     private JFrame frame;
 
     private JTextField tFieldUser;
-    private JTextField tFieldPasswort;
+    private JPasswordField tFieldPasswort;
     private JButton btnLogin;
     private JButton btnClear;
     private JPanel mainPanel;
@@ -27,12 +28,12 @@ public class MainFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 String usrInput = tFieldUser.getText();
-                String pwdInput = tFieldPasswort.getText();
+                char[] password = tFieldPasswort.getPassword();
 
-                if (usrInput.equals(Husr) && pwdInput.equals(Hpwd)){
+                if (usrInput.equals(Husr) && Arrays.equals(Hpwd, password)){
                     menu vA = new menu();
                     frame.dispose();
-                    } else {
+                } else {
                     tFieldUser.setText("");
                     tFieldPasswort.setText("");
                 }
