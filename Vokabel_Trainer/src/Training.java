@@ -3,6 +3,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
+import java.util.Locale;
 
 public class Training {
     private JFrame frame0;
@@ -49,7 +50,9 @@ public class Training {
         testBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                checkVok();
+                if(!VokabelEnt.getText().equals("")){
+                    checkVok();
+                }
             }
         });
 
@@ -67,17 +70,23 @@ public class Training {
                 if (lang == true){
                     deVok.setText("Englische Vokabel");
                     zuSchreiben.setText("Deutsche Vokabel");
+                    lang = false;
                 } else {
                     zuSchreiben.setText("Englische Vokabel");
                     deVok.setText("Deutsche Vokabel");
+                    lang = true;
                 }
-                lang = !lang;
+                showVok();
             }
         });
     }
 
     public void checkVok(){
-        if(lang && engVok.equals(VokabelEnt.getText())){
+        String VokInput = VokabelEnt.getText().toLowerCase().replace(" ", "");
+        String VokCheckEN = engVok.toLowerCase().replace(" ", "");
+        String VokCheckDE = deuVok.toLowerCase().replace(" ", "");
+
+        if(lang && VokCheckEN.equals(VokInput)){
             TrainingG.setBackground(Color.green);
             VokVal += wert;
             try {
@@ -86,7 +95,7 @@ public class Training {
                 e.printStackTrace();
             }
             showVok();
-        } else if (lang && !engVok.equals(VokabelEnt.getText())){
+        } else if (lang && !VokCheckEN.equals(VokInput)){
             TrainingG.setBackground(Color.red);
             VokVal -= wert;
             try {
@@ -95,7 +104,7 @@ public class Training {
                 e.printStackTrace();
             }
             showVok();
-        } else if (!lang && deuVok.equals(VokabelEnt.getText())){
+        } else if (!lang && VokCheckDE.equals(VokInput)){
             TrainingG.setBackground(Color.green);
             VokVal += wert;
             try {
@@ -104,7 +113,7 @@ public class Training {
                 e.printStackTrace();
             }
             showVok();
-        } else if (!lang && !deuVok.equals(VokabelEnt.getText())){
+        } else if (!lang && !VokCheckDE.equals(VokInput)){
             TrainingG.setBackground(Color.red);
             VokVal -= wert;
             try {
@@ -117,6 +126,7 @@ public class Training {
 
     }
     public void showVok(){
+        VokabelEnt.setText("");
         vokNr = Vokabel.randomVok();
         engVok = Vokabel.getVokEN(vokNr);
         deuVok = Vokabel.getVokDE(vokNr);
