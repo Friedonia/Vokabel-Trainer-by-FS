@@ -1,11 +1,8 @@
-import com.sun.tools.javac.Main;
-
 import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+
 
 public class menu {
-    private JFrame frame0;
+    private final JFrame frame0;
 
     private JLabel wilkommen1;
     private JLabel wilkommen2;
@@ -25,39 +22,27 @@ public class menu {
         frame0.setVisible(true);
 
 
-        logoutBut.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                MainFrame vA = new MainFrame();
-                frame0.dispose();
-            }
+        logoutBut.addActionListener(e -> {
+            new MainFrame();
+            frame0.dispose();
         });
-        practiceButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                Training vA = new Training();
-                frame0.dispose();
-            }
+        practiceButton.addActionListener(e -> {
+            new Training();
+            frame0.dispose();
         });
-        delBtn.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                VokListe vA = new VokListe();
-                frame0.dispose();
-            }
+        delBtn.addActionListener(e -> {
+            new VokListe();
+            frame0.dispose();
         });
-        addVokabelButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                AddVok vA = new AddVok();
-                frame0.dispose();
-            }
+        addVokabelButton.addActionListener(e -> {
+            new AddVok();
+            frame0.dispose();
         });
     }
 
 
     public static void main(String[] args) {
-        MainFrame myFrame = new MainFrame();
+         new MainFrame();
     }
 }
 
