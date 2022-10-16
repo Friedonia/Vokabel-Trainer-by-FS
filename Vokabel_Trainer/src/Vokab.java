@@ -17,27 +17,54 @@ public class Vokab
 
 
     public Vokab(){}
-    public void sortVal(){
-        for(int i =0; i < getCount(); i++){
-            for(int x = 0; x < alphSortVal.length +1; i++){
-                if (alphSortVal[i] > alphSortVal[x]) {
 
-                    }
-                }
+    public void sortVal(){
+        int[] betaSortVal = {};
+        alphSortVal = new int[]{};
+        for(int i = 0; i< getCount(); i++){
+            alphSortVal = arrayAdd(alphSortVal, i);
+            betaSortVal = arrayAdd(betaSortVal, getVokValue(i));
+        }
+        for(int i = 1; i< betaSortVal.length; i++){
+            int a = 0;
+            int c = 0;
+            for(int b = 0; b < i; b++){
+                a = getVokValue(i- 1- b);
+                c = getVokValue(i-b);
+                if (a < c){
+                    alphSortVal=  moveUp(alphSortVal, i);
+                    betaSortVal = moveUp(betaSortVal, i);
+                } else { break; }
             }
         }
-    void bubbleSort(int arr[])
-    {
-        int n = arr.length;
-        for (int i = 0; i < n - 1; i++)
-            for (int j = 0; j < n - i - 1; j++)
-                if (arr[j] > arr[j + 1]) {
-                    // swap arr[j+1] and arr[j]
-                    int temp = arr[j];
-                    arr[j] = arr[j + 1];
-                    arr[j + 1] = temp;
-                }
     }
+
+    public int[] arrayAdd(int[] array, int a)
+    {
+        int[] intArray = array;
+        int o = intArray.length;
+        int[] SecondArray = new int[o+1];
+
+        System.arraycopy(intArray, 0, SecondArray, 0, o);
+
+        SecondArray[o] = a;
+
+        intArray = SecondArray;
+
+        return intArray;
+    }
+
+        public int[] moveUp(int[] arr,int index){
+            int value;
+            int arrayLength = arr.length;
+            if (arrayLength > index && index > 0){
+                value = arr[index];
+                arr[index] = arr[index-1];
+                arr[index-1] = value;
+            }
+        return arr;
+        }
+
 
 
     public void liesVokabelnEin() {
@@ -110,8 +137,7 @@ public class Vokab
                 }
                 aktuelNr += 1;
             }
-            int number = Integer.parseInt(VALvok);
-            return number;
+            return Integer.parseInt(VALvok);
         } catch(Exception e) {
             e.printStackTrace();
             return 0;
